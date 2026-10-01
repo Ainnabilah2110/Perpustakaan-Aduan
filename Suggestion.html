@@ -1,0 +1,182 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Borang Cadangan Perpustakaan</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: whitesmoke;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        h1 {
+            text-align: center;
+            color:navy;
+        }
+
+        p {
+            text-align: center;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: navy;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>💡 Borang Cadangan Perpustakaan</h1>
+
+    <p>
+        Kami mengalu-alukan idea dan cadangan anda
+        untuk membantu menambah baik perkhidmatan
+        dan kemudahan perpustakaan.
+    </p>
+
+    <form>
+
+        <label for="name">Nama</label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Masukkan nama anda">
+
+        <label for="date">Tarikh</label>
+
+        <input type="date" id="date">
+
+        <label for="category">Kategori Cadangan</label>
+
+        <select id="category">
+
+            <option value="">
+                -- Sila Pilih Kategori --
+            </option>
+
+            <option>Koleksi Buku</option>
+
+            <option>Kemudahan</option>
+
+            <option>Perkhidmatan Perpustakaan</option>
+
+            <option>Komputer / WiFi</option>
+
+            <option>Ruang Membaca</option>
+
+            <option>Program / Aktiviti</option>
+
+            <option>Kebersihan</option>
+
+            <option>Lain-lain</option>
+
+        </select>
+
+        <label for="suggestion">
+            Cadangan Anda
+        </label>
+
+        <textarea
+            id="suggestion"
+            placeholder="Sila tuliskan cadangan anda di sini..."></textarea>
+
+        <label for="benefit">
+            Sebab / Manfaat Cadangan
+        </label>
+
+        <textarea
+            id="benefit"
+            placeholder="Sila nyatakan sebab atau manfaat cadangan anda..."></textarea>
+
+        <label for="additional">
+            Komen Tambahan
+        </label>
+
+        <textarea
+            id="additional"
+            placeholder="Sebarang komen tambahan..."></textarea>
+
+        <button type="submit">
+            Hantar Cadangan
+        </button>
+
+    </form>
+  <script>
+document.querySelector("form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const cadangan = {
+        nama: document.getElementById("name").value,
+        tarikh: document.getElementById("date").value,
+        kategori: document.getElementById("category").value,
+        cadangan: document.getElementById("suggestion").value,
+        manfaat: document.getElementById("benefit").value,
+        tambahan: document.getElementById("additional").value
+    };
+
+    let data = JSON.parse(localStorage.getItem("cadanganPerpustakaan")) || [];
+
+    data.push(cadangan);
+
+    localStorage.setItem(
+        "cadanganPerpustakaan",
+        JSON.stringify(data)
+    );
+
+    alert("💡 Cadangan anda berjaya dihantar dan telah disimpan. Terima kasih atas maklum balas anda.");
+
+    this.reset();
+});
+  </script>
+
+</div>
+
+</body>
+</html>

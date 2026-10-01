@@ -1,0 +1,169 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Borang Penghargaan Perpustakaan</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        h1 {
+            text-align: center;
+            color: forestgreen;
+        }
+
+        p {
+            text-align: center;
+            color: dimgrey;
+            line-height: 1.5;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: forestgreen;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>💚 Borang Penghargaan Perpustakaan</h1>
+
+    <p>
+        Terima kasih kerana meluangkan masa untuk memberikan
+        penghargaan kepada pihak perpustakaan.
+        Maklum balas anda amat kami hargai.
+    </p>
+
+    <form>
+
+        <label for="name">Nama</label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Masukkan nama anda">
+
+        <label for="date">Tarikh</label>
+
+        <input type="date" id="date">
+
+        <label for="category">Kategori Penghargaan</label>
+
+        <select id="category">
+
+            <option value="">
+                -- Sila Pilih Kategori --
+            </option>
+
+            <option>Kakitangan</option>
+
+            <option>Perkhidmatan Perpustakaan</option>
+
+            <option>Kemudahan</option>
+
+            <option>Buku / Koleksi</option>
+
+            <option>Program Perpustakaan</option>
+
+            <option>Lain-lain</option>
+
+        </select>
+
+        <label for="compliment">
+            Penghargaan / Komen
+        </label>
+
+        <textarea
+            id="compliment"
+            placeholder="Sila tuliskan penghargaan atau komen anda di sini..."></textarea>
+
+        <label for="additional">
+            Komen Tambahan
+        </label>
+
+        <textarea
+            id="additional"
+            placeholder="Sebarang komen atau cadangan tambahan..."></textarea>
+
+        <button type="submit">
+            Hantar Penghargaan
+        </button>
+
+    </form>
+
+  
+<script>
+document.querySelector("form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const penghargaan = {
+        nama: document.getElementById("name").value,
+        tarikh: document.getElementById("date").value,
+        kategori: document.getElementById("category").value,
+        komen: document.getElementById("compliment").value,
+        tambahan: document.getElementById("additional").value
+    };
+
+    let data = JSON.parse(localStorage.getItem("penghargaanPerpustakaan")) || [];
+
+    data.push(penghargaan);
+
+    localStorage.setItem(
+        "penghargaanPerpustakaan",
+        JSON.stringify(data)
+    );
+
+    alert("💚 Penghargaan anda berjaya dihantar dan telah disimpan. Terima kasih atas maklum balas anda.");
+
+    this.reset();
+});
+</script>
+</div>
+</body>
+</html>

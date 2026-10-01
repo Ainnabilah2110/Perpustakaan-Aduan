@@ -1,0 +1,130 @@
+<html>
+<head>
+
+    <title>Sistem Maklum Balas Perpustakaan</title>
+  <a href="Login.html" class="admin">
+    🔐 Log Masuk Admin
+</a>
+  .
+
+    <style>
+      admin {
+    display: block;
+    margin-top: 20px;
+    padding: 12px;
+    text-align: center;
+    color:grey;
+    border: 1px solid white;
+    border-radius: 8px;
+}
+      
+        body {
+            font-family: Arial,bold;
+            background: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px hwb(0 31% 69%);
+        
+        }
+
+        h1 {
+            text-align: center;
+            color:black;
+            margin-bottom:20px;
+           
+        }
+
+        .subtitle {
+            text-align: center;
+            color: grey;
+            margin-bottom:30px;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .complaint {
+            background: hwb(0 21% 0%);
+        }
+
+        .compliment {
+            background:forestgreen;
+        }
+
+        .suggestion {
+            background:navy;
+        }
+
+        .menu a:active {
+            transform: scale(0.98);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: grey;
+            font-size: 13px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>📚 Sistem Maklum Balas Perpustakaan</h1>
+
+        <p class="subtitle">
+            
+            Sila pilih jenis maklum balas yang ingin anda berikan.
+        </p>
+
+        <div class="menu">
+
+            <a href="Complain.html" class="complaint">
+                🔴 Aduan
+            </a>
+
+            <a href="Compliment.html" class="compliment">
+                💚 Penghargaan
+            </a>
+
+            <a href="Suggestion.html" class="suggestion">
+                💡 Cadangan
+            </a>
+
+        </div>
+
+        <div class="footer">
+            Terima kasih kerana membantu kami menambah baik
+            perkhidmatan perpustakaan.
+        </div>
+
+    </div>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</body>
+</html>

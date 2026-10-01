@@ -1,0 +1,531 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin - Maklum Balas </title>
+
+    <style>
+
+        body {
+            font-family: Arial,sans-serif;
+            background: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: black;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: darkgray;
+            margin-bottom: 25px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin: 5px 0;
+            font-size: 30px;
+        }
+
+        .card p {
+            margin: 0;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .aduan h2 {
+            color: red;
+        }
+
+        .penghargaan h2 {
+            color:green;
+        }
+
+        .cadangan h2 {
+            color: blue;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            margin-top: 0;
+        }
+
+        .item {
+            border-top: 1px solid white;
+            padding: 15px 0;
+        }
+
+        .item:first-child {
+            border-top: none;
+        }
+
+        .item strong {
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .empty {
+            color: grey;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            text-decoration: none;
+            color: royalblue;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📊 Dashboard Admin</h1>
+
+    <p class="subtitle">
+        Sistem Maklum Balas Perpustakaan
+    </p>
+
+    <div class="stats">
+
+        <div class="card aduan">
+            <h2 id="jumlahAduan">0</h2>
+            <p>🔴 Aduan</p>
+        </div>
+
+        <div class="card penghargaan">
+            <h2 id="jumlahPenghargaan">0</h2>
+            <p>💚 Penghargaan</p>
+        </div>
+
+        <div class="card cadangan">
+            <h2 id="jumlahCadangan">0</h2>
+            <p>💡 Cadangan</p>
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>🔴 Senarai Aduan</h2>
+
+        <div id="senaraiAduan"></div>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>💚 Senarai Penghargaan</h2>
+
+        <div id="senaraiPenghargaan"></div>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>💡 Senarai Cadangan</h2>
+
+        <div id="senaraiCadangan"></div>
+
+    </div>
+
+
+    <div style="margin-top:25px; text-align:center;">
+
+    <a href="MainMenu.html"
+       style="display:block; margin-bottom:12px; text-decoration:none; color:#1565c0; font-weight:bold;">
+        ← Kembali ke Menu Utama
+    </a>
+
+    <a href="Login.html"
+       style="display:block; padding:12px; background:#c62828; color:white; border-radius:8px; text-decoration:none; font-weight:bold;">
+        🔐 Log Keluar
+    </a>
+
+</div>
+    </>
+
+</div>
+
+
+<script>
+
+const aduan =
+    JSON.parse(localStorage.getItem("aduanPerpustakaan")) || [];
+
+const penghargaan =
+    JSON.parse(localStorage.getItem("penghargaanPerpustakaan")) || [];
+
+const cadangan =
+    JSON.parse(localStorage.getItem("cadanganPerpustakaan")) || [];
+
+
+document.getElementById("jumlahAduan").textContent = aduan.length;
+
+document.getElementById("jumlahPenghargaan").textContent =
+    penghargaan.length;
+
+document.getElementById("jumlahCadangan").textContent =
+    cadangan.length;
+
+
+
+function paparkanAduan() {
+
+    const container =
+        document.getElementById("senaraiAduan");
+
+    if (aduan.length === 0) {
+
+        container.innerHTML =
+            '<div class="empty">Tiada aduan diterima.</div>';
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    aduan.forEach(function(item) {
+
+        container.innerHTML += `
+            <div class="item">
+
+                <strong>Nama:</strong> ${item.nama || "-"}<br>
+
+                <strong>Tarikh:</strong> ${item.tarikh || "-"}<br>
+
+                <strong>Kategori:</strong> ${item.kategori || "-"}<br>
+
+                <strong>Butiran:</strong> ${item.butiran || "-"}<br>
+
+                <strong>Cadangan:</strong> ${item.cadangan || "-"}
+
+            </div>
+        `;
+
+    });
+}
+
+
+
+function paparkanPenghargaan() {
+
+    const container =
+        document.getElementById("senaraiPenghargaan");
+
+    if (penghargaan.length === 0) {
+
+        container.innerHTML =
+            '<div class="empty">Tiada penghargaan diterima.</div>';
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    penghargaan.forEach(function(item) {
+
+        container.innerHTML += `
+            <div class="item">
+
+                <strong>Nama:</strong> ${item.nama || "-"}<br>
+
+                <strong>Tarikh:</strong> ${item.tarikh || "-"}<br>
+
+                <strong>Kategori:</strong> ${item.kategori || "-"}<br>
+
+                <strong>Penghargaan:</strong> ${item.komen || "-"}<br>
+
+                <strong>Komen Tambahan:</strong> ${item.tambahan || "-"}
+
+            </div>
+        `;
+
+    });
+}
+
+
+
+function paparkanCadangan() {
+
+    const container =
+        document.getElementById("senaraiCadangan");
+
+    if (cadangan.length === 0) {
+
+        container.innerHTML =
+            '<div class="empty">Tiada cadangan diterima.</div>';
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    cadangan.forEach(function(item) {
+
+        container.innerHTML += `
+            <div class="item">
+
+                <strong>Nama:</strong> ${item.nama || "-"}<br>
+
+                <strong>Tarikh:</strong> ${item.tarikh || "-"}<br>
+
+                <strong>Kategori:</strong> ${item.kategori || "-"}<br>
+
+                <strong>Cadangan:</strong> ${item.cadangan || "-"}<br>
+
+                <strong>Manfaat:</strong> ${item.manfaat || "-"}<br>
+
+                <strong>Komen Tambahan:</strong> ${item.tambahan || "-"}
+
+            </div>
+        `;
+
+    });
+}
+
+
+paparkanAduan();
+
+paparkanPenghargaan();
+
+paparkanCadangan();
+
+</script>
+  <script>
+
+function bacaData(nama) {
+    return JSON.parse(localStorage.getItem(nama)) || [];
+}
+
+function paparkanAduan() {
+
+    const data = bacaData("aduanPerpustakaan");
+
+    document.getElementById("jumlahAduan").textContent = data.length;
+
+    const container = document.getElementById("senaraiAduan");
+
+    if (data.length === 0) {
+        container.innerHTML =
+            '<div class="empty">Tiada aduan diterima.</div>';
+        return;
+    }
+
+    container.innerHTML = "";
+
+    data.forEach(function(item, index) {
+
+        container.innerHTML += `
+            <div class="item">
+
+                <strong>Nama:</strong> ${item.nama || "-"}<br>
+                <strong>Tarikh:</strong> ${item.tarikh || "-"}<br>
+                <strong>Kategori:</strong> ${item.kategori || "-"}<br>
+                <strong>Butiran:</strong> ${item.butiran || "-"}<br>
+                <strong>Cadangan:</strong> ${item.cadangan || "-"}
+
+                <br><br>
+
+                <button
+                    onclick="padamAduan(${index})"
+                    style="background:#c62828;color:white;border:none;padding:8px 14px;border-radius:7px;">
+                    🗑️ Padam
+                </button>
+
+            </div>
+        `;
+    });
+}
+function paparkanPenghargaan() {
+
+    const data = bacaData("penghargaanPerpustakaan");
+
+    document.getElementById("jumlahPenghargaan").textContent =
+        data.length;
+
+    const container =
+        document.getElementById("senaraiPenghargaan");
+
+    if (data.length === 0) {
+        container.innerHTML =
+            '<div class="empty">Tiada penghargaan diterima.</div>';
+        return;
+    }
+
+    container.innerHTML = "";
+
+    data.forEach(function(item, index) {
+
+        container.innerHTML += `
+            <div class="item">
+
+                <strong>Nama:</strong> ${item.nama || "-"}<br>
+                <strong>Tarikh:</strong> ${item.tarikh || "-"}<br>
+                <strong>Kategori:</strong> ${item.kategori || "-"}<br>
+                <strong>Penghargaan:</strong> ${item.komen || "-"}<br>
+                <strong>Komen Tambahan:</strong> ${item.tambahan || "-"}
+
+                <br><br>
+
+                <button
+                    onclick="padamPenghargaan(${index})"
+                    style="background:#2e7d32;color:white;border:none;padding:8px 14px;border-radius:7px;">
+                    🗑️ Padam
+                </button>
+
+            </div>
+        `;
+    });
+}
+
+function paparkanCadangan() {
+
+    const data = bacaData("cadanganPerpustakaan");
+
+    document.getElementById("jumlahCadangan").textContent =
+        data.length;
+
+    const container =
+        document.getElementById("senaraiCadangan");
+
+    if (data.length === 0) {
+        container.innerHTML =
+            '<div class="empty">Tiada cadangan diterima.</div>';
+        return;
+    }
+
+    container.innerHTML = "";
+
+    data.forEach(function(item, index) {
+
+        container.innerHTML += `
+            <div class="item">
+
+                <strong>Nama:</strong> ${item.nama || "-"}<br>
+                <strong>Tarikh:</strong> ${item.tarikh || "-"}<br>
+                <strong>Kategori:</strong> ${item.kategori || "-"}<br>
+                <strong>Cadangan:</strong> ${item.cadangan || "-"}<br>
+                <strong>Manfaat:</strong> ${item.manfaat || "-"}<br>
+                <strong>Komen Tambahan:</strong> ${item.tambahan || "-"}
+
+                <br><br>
+
+                <button
+                    onclick="padamCadangan(${index})"
+                    style="background:#1565c0;color:white;border:none;padding:8px 14px;border-radius:7px;">
+                    🗑️ Padam
+                </button>
+
+            </div>
+        `;
+    });
+}
+
+function padamAduan(index) {
+
+    if (!confirm("Adakah anda pasti mahu padam aduan ini?")) {
+        return;
+    }
+
+    const data = bacaData("aduanPerpustakaan");
+
+    data.splice(index, 1);
+
+    localStorage.setItem(
+        "aduanPerpustakaan",
+        JSON.stringify(data)
+    );
+
+    paparkanAduan();
+}
+
+function padamPenghargaan(index) {
+
+    if (!confirm("Adakah anda pasti mahu padam penghargaan ini?")) {
+        return;
+    }
+
+    const data = bacaData("penghargaanPerpustakaan");
+
+    data.splice(index, 1);
+
+    localStorage.setItem(
+        "penghargaanPerpustakaan",
+        JSON.stringify(data)
+    );
+
+    paparkanPenghargaan();
+}
+function padamCadangan(index) {
+
+    if (!confirm("Adakah anda pasti mahu padam cadangan ini?")) {
+        return;
+    }
+
+    const data = bacaData("cadanganPerpustakaan");
+
+    data.splice(index, 1);
+
+    localStorage.setItem(
+        "cadanganPerpustakaan",
+        JSON.stringify(data)
+    );
+
+    paparkanCadangan();
+}
+
+paparkanAduan();
+paparkanPenghargaan();
+paparkanCadangan();
+
+</script>
+
+</body>
+
+</html>

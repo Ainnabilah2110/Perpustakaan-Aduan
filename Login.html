@@ -1,0 +1,201 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Log Masuk Admin</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            background: white;
+            padding: 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 400px;
+
+            background: white;
+            padding: 30px;
+
+            border-radius: 20px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .icon {
+            text-align: center;
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #263238;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color:grey;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+
+            padding: 13px;
+            margin-top: 7px;
+
+            border: 1px solid #ccc;
+            border-radius: 8px;
+
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+
+            margin-top: 25px;
+            padding: 13px;
+
+            border: none;
+            border-radius: 8px;
+            background: navy;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .error {
+            color: #c62828;
+            text-align: center;
+
+            margin-top: 15px;
+
+            display: none;
+        }
+
+        .back {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            text-decoration: none;
+            color: #1565c0;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="login-box">
+
+    <div class="icon">
+        🔐
+    </div>
+
+    <h1>Log Masuk Admin</h1>
+
+    <p class="subtitle">
+        Sistem Maklum Balas Perpustakaan
+    </p>
+
+
+    <form id="loginForm">
+
+        <label for="username">
+            ID Pengguna
+        </label>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Masukkan id pengguna"
+            required
+        >
+
+
+        <label for="password">
+            Kata Laluan
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Masukkan kata laluan"
+            required
+        >
+
+
+        <button type="submit">
+            🔐 Log Masuk
+        </button>
+
+        <div id="error" class="error">
+            ❌ Nama pengguna atau kata laluan salah.
+        </div>
+
+    </form>
+
+
+    <a href="MainMenu.html" class="back">
+        ← Kembali ke Menu Utama
+    </a>
+
+</div>
+
+
+<script>
+
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const username =
+        document.getElementById("username").value;
+
+    const password =
+        document.getElementById("password").value;
+
+    if (username === "AdminPPAPP" && password === "Lib1234") {
+
+        window.location.href = "Admin.html";
+
+    } else {
+
+        document.getElementById("error").style.display = "block";
+
+    }});
+
+</script>
+
+</body>
+
+</html>

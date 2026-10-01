@@ -1,0 +1,173 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Borang Aduan Perpustakaan</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #c62828;
+        }
+
+        p {
+            text-align: center;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .anonymous {
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .anonymous input {
+            width: auto;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #c62828;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📢 Borang Aduan Perpustakaan</h1>
+
+    <p>
+        Kami menghargai maklum balas anda.
+        Sila kongsikan sebarang masalah atau pengalaman
+        yang ingin kami perbaiki.
+    </p>
+
+    <form>
+
+        <label for="name">Nama</label>
+        <input
+            type="text"
+            id="name"
+            placeholder="Masukkan nama anda">
+
+        <div class="anonymous">
+            <input type="checkbox" id="anonymous">
+            <label for="anonymous">
+                Saya ingin memberikan maklum balas secara tanpa nama
+            </label>
+        </div>
+
+        <label for="date">Tarikh</label>
+        <input type="date" id="date">
+
+        <label for="category">Kategori Aduan</label>
+
+        <select id="category">
+            <option value="">-- Sila Pilih Kategori --</option>
+            <option>Kakitangan</option>
+            <option>Perkhidmatan Perpustakaan</option>
+            <option>Kemudahan</option>
+            <option>Buku / Koleksi</option>
+            <option>Komputer / WiFi</option>
+            <option>Kebersihan</option>
+            <option>Lain-lain</option>
+        </select>
+
+        <label for="complaint">Butiran Aduan</label>
+
+        <textarea
+            id="complaint"
+            placeholder="Sila nyatakan butiran aduan anda..."></textarea>
+
+        <label for="suggestion">
+            Cadangan / Komen Tambahan
+        </label>
+
+        <textarea
+            id="suggestion"
+            placeholder="Bagaimanakah kami boleh menambah baik perkhidmatan?"></textarea>
+
+        <button type="submit">
+            Hantar Aduan
+        </button>
+
+    </form>
+  <script>
+document.querySelector("form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const aduan = {
+        nama: document.getElementById("name").value,
+        tarikh: document.getElementById("date").value,
+        kategori: document.getElementById("category").value,
+        butiran: document.getElementById("complaint").value,
+        cadangan: document.getElementById("suggestion").value
+    };
+
+    let data = JSON.parse(localStorage.getItem("aduanPerpustakaan")) || [];
+
+    data.push(aduan);
+
+    localStorage.setItem("aduanPerpustakaan", JSON.stringify(data));
+
+    alert("✅ Aduan anda berjaya dihantar. Terima kasih atas maklum balas anda.");
+});
+    this.reset();
+  </script>
+
+
+
+</div>
+
+</body>
+</html>
